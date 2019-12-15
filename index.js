@@ -119,12 +119,12 @@ var inventory = [
   *
   * NOTE: This example has been completed for you.
 **/
-function get3rdCar(inventory) {
-  const the3rd = inventory.find((item, index) => {
-    return index === 2 // we use 2 because index is zero-based.
-  })
-  return `The car is a ${the3rd.car_make} ${the3rd.car_model}`
-}
+// function get3rdCar(inventory) {
+//   const the3rd = inventory.find((item, index) => {
+//     return index === 2 // we use 2 because index is zero-based.
+//   })
+//   return `The car is a ${the3rd.car_make} ${the3rd.car_model}`
+// }
 
 // 👇 COMPLETE YOUR WORK BELOW 👇
 // 👇 COMPLETE YOUR WORK BELOW 👇
@@ -221,8 +221,12 @@ function sortCarInventory(inventory) {
  *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
  * getModelYears returns an array containing all the 'car_year's in the inventory.
 */
-function getModelYears(/* code here */) {
-  /* code here */
+function getModelYears(inventory) {
+  let years = [];
+  for(let i = 0; i < inventory.length; i++) {
+    years.push(inventory[i].car_year)
+  }
+  return years;
 }
 
 /**
@@ -237,8 +241,15 @@ function getModelYears(/* code here */) {
  * with a `car_year` which is at most the given desired max year,
  * in the same order as they appear in the original inventory.
 */
-function getOlderCars(/* code here */) {
-  /* code here */
+
+function getOlderCars(inventory, year) {
+  let olderCars = [];
+  for(let i = 0; i < inventory.length; i++) {
+    if(inventory[i].car_year <= year) {
+      olderCars.push(inventory[i])
+    }
+  }
+  return olderCars;
 }
 
 /**
@@ -252,8 +263,17 @@ function getOlderCars(/* code here */) {
  * made by either `Audi` or `Mercedes-Benz` or `Volkswagen` or `BMW`,
  * in the same order as they appear in the original inventory.
 */
-function getGermanCars(/* code here */) {
-  /* code here */
+function getGermanCars(inventory) {
+  let germanCars = [];
+  for(let i = 0; i < inventory.length; i++) {
+    if(inventory[i].car_make === 'Audi' || 
+    inventory[i].car_make === 'Mercedes-Benz' || 
+    inventory[i].car_make === 'Volkswagen' || 
+    inventory[i].car_make === 'BMW' ) {
+      germanCars.push(inventory[i])
+    }
+  }
+  return germanCars;
 }
 
 /**
@@ -266,6 +286,8 @@ function getGermanCars(/* code here */) {
  *   return a + b
  * }
  * 
+ *
+ * 
  * const addFive = function(num) {
 *    return num + 5
  * }
@@ -274,9 +296,9 @@ function getGermanCars(/* code here */) {
  *   return num * 2
  * }
 */
-const sum = null; // code here!
-const addFive = null; // code here!
-const argTimesTwo = null; // code here!
+const sum = (num1, num2) => num1 + num2; // code here!
+const addFive = (num) => num + 5; // code here!
+const argTimesTwo = (num) => num * 2; // code here!
 
 /**
  * ### Challenge `carMaker`
@@ -291,8 +313,14 @@ const argTimesTwo = null; // code here!
  *         (1) causes the odometer in the object to be increased by the distance,
  *         (2) returns the updated value of the `odometer`.
 */
-function carMaker(/* code here */) {
-  /* code here */
+function carMaker(odometer) {
+  return {
+    odometer: odometer,
+    drive: function(distance) {
+      this.odometer += distance;
+      return this.odometer
+    }
+  }
 }
 
 /// ////// END OF CHALLENGE /////////
